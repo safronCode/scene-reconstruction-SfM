@@ -1,0 +1,11 @@
+general:
+  logging: True
+
+  object_name: "ToyFrog"
+  input_dir_path: default
+  output_dir_path: default
+
+  show_calcs: True
+  show_visualizations: True
+
+extractor: "superpoint"
