@@ -1,0 +1,12 @@
+name: "superpoint"
+output: "feats-superpoint"
+configuration:
+  descriptor_dim: 256
+  max_num_keypoints: 1000000
+  detection_threshold: 0.0005
+  nms_radius: 4
+  remove_borders: 4
+preprocessing:
+  grayscale: True
+  resize_max: 1600
+  resize_force: False

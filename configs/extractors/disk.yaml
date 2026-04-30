@@ -1,0 +1,13 @@
+name: "disk"
+output: "feats-disk"
+configuration:
+  descriptor_dim: 128
+  max_num_keypoints: 1000000
+  detection_threshold:  0.0005
+  nms_radius: 5
+  weights: "depth"
+  pad_if_not_divisible: True
+preprocessing:
+  grayscale: False
+  resize_max: 1024
+  resize_force: False
