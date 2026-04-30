@@ -6,10 +6,8 @@ from .base import BaseMatcherConfig
 
 @dataclass(frozen=True, slots=True)
 class LightGlueConfiguration:
-    max_num_keypoints: int
-    detection_threshold: float
-    nms_radius: int
-    remove_borders: int
+    features: str
+    filter_threshold: float
 
 @dataclass(frozen=True, slots=True)
 class LightGlueMatcherConfig(BaseMatcherConfig[LightGlueConfiguration]):

@@ -1,5 +1,7 @@
-from dataclasses import dataclass
 from pathlib import Path
+from dataclasses import dataclass
+
+from src.core import BASE_DIR
 
 
 @dataclass(frozen=True)
@@ -17,8 +19,8 @@ class GeneralConfig:
             show_visualizations [bool] - флаг демонстрации визуализаций
     """
     object_name: str
-    input_dir_path: Path | None = None
-    output_dir_path: Path | None = None
+    input_dir_path: Path | str
+    output_dir_path: Path | str
 
     logging: bool = False
     show_calcs: bool = False
@@ -28,20 +30,29 @@ class GeneralConfig:
         if not self.object_name or not isinstance(self.object_name, str):
             raise ValueError("object_name must be a non-empty string")
 
-        # todo доработать - validation из yaml приходит "default"
-        if self.input_dir_path is None:
-            object.__setattr__(self, "input_dir_path", Path(__file__).parent)
+        input_dir_path = self.input_dir_path or "default"
+        output_dir_path = self.output_dir_path or "default"
 
-        if self.output_dir_path is None:
-            object.__setattr__(self, "output_dir_path", Path(__file__).parent)
+        if input_dir_path == "default":
+            input_dir_path: Path = BASE_DIR / "data_i" / self.object_name
+        else:
+            input_dir_path: Path = Path(input_dir_path)
 
+        if output_dir_path == "default":
+            output_dir_path: Path = BASE_DIR / "data_o" / self.object_name
+        else:
+            output_dir_path: Path = Path(output_dir_path)
+        output_dir_path.mkdir(parents=True, exist_ok=True)
+
+        object.__setattr__(self, "input_dir_path", input_dir_path)
+        object.__setattr__(self, "output_dir_path", output_dir_path)
 
     @classmethod
     def create_by_dict(cls, data: dict) -> "GeneralConfig":
         return cls(
             object_name=data.get("object_name"),
-            input_dir_path=data.get("input_dir_path"),
-            output_dir_path=data.get("output_dir_path"),
+            input_dir_path=data.get("input_dir_path", "default"),
+            output_dir_path=data.get("output_dir_path", "default"),
 
             logging=data.get("logging", False),
             show_calcs=data.get("show_calcs", False),
