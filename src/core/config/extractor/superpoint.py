@@ -6,6 +6,7 @@ from .base import BaseExtractorConfig, PreprocessingConfig
 
 @dataclass
 class SuperPointConfiguration:
+    descriptor_dim: int
     max_num_keypoints: int
     detection_threshold: float
     nms_radius: int

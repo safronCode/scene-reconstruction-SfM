@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
-from src.core import BASE_DIR
+from src.core.constants import BASE_DIR
 from .general import GeneralConfig
 from .extractor import EXTRACTOR_CONFIGS
 from .matcher import MATCHER_CONFIGS

@@ -1,7 +1,7 @@
 from pathlib import Path
 from dataclasses import dataclass
 
-from src.core import BASE_DIR
+from src.core.constants import BASE_DIR
 
 
 @dataclass(frozen=True)

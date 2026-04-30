@@ -9,6 +9,7 @@ T = TypeVar("T")
 class PreprocessingConfig:
     grayscale: bool
     resize_max: int
+    resize_force: bool
 
 @dataclass(frozen=True, slots=True)
 class BaseExtractorConfig(Generic[T], ABC):
